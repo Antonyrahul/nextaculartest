@@ -106,6 +106,7 @@ CREATE TABLE "verificationTokens" (
 CREATE TABLE "workspaces" (
     "id" TEXT NOT NULL,
     "workspaceCode" TEXT NOT NULL,
+    "workspacehtml" TEXT NOT NULL,
     "inviteCode" TEXT NOT NULL,
     "creatorId" TEXT NOT NULL,
     "name" TEXT NOT NULL,

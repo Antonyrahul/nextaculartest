@@ -37,6 +37,7 @@ export const createWorkspace = async (creatorId, email, name, slug) => {
       },
       name,
       slug,
+      workspacehtml: "<div>hola</div>"
     },
   });
   await sendMail({
@@ -109,19 +110,20 @@ export const getSiteWorkspace = async (slug, customDomain) =>
       name: true,
       slug: true,
       domains: { select: { name: true } },
+      workspacehtml: true,
     },
     where: {
       OR: [
         { slug },
         customDomain
           ? {
-              domains: {
-                some: {
-                  name: slug,
-                  deletedAt: null,
-                },
+            domains: {
+              some: {
+                name: slug,
+                deletedAt: null,
               },
-            }
+            },
+          }
           : undefined,
       ],
       AND: { deletedAt: null },

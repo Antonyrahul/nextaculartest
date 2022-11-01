@@ -130,6 +130,7 @@ model Workspace {
   id            String    @id @default(cuid())
   workspaceCode String    @unique @default(cuid())
   inviteCode    String    @unique @default(cuid())
+  workspacehtml String
   creatorId     String
   name          String
   slug          String

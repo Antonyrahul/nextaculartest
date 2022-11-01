@@ -15,10 +15,11 @@ const Site = ({ workspace }) => {
   if (router.isFallback) {
     return <h1>Loading...</h1>;
   }
+  console.log(workspace)
 
   return workspace ? (
-    <main className="relative flex flex-col items-center justify-center h-screen space-y-10 text-gray-800 bg-gray-50">
-      <Meta title={workspace.name} />
+    <main>
+      {/* <Meta title={workspace.name} />
       <div className="flex flex-col items-center justify-center p-10 space-y-5 text-center ">
         <h1 className="text-4xl font-bold">
           Welcome to your workspace&apos;s subdomain!
@@ -47,7 +48,8 @@ const Site = ({ workspace }) => {
             </a>
           </Link>
         ))}
-      </div>
+      </div> */}
+      <div dangerouslySetInnerHTML={{ __html: workspace.workspacehtml }} />
     </main>
   ) : (
     <>
@@ -58,6 +60,7 @@ const Site = ({ workspace }) => {
 };
 
 export const getStaticPaths = async () => {
+  console.log("in")
   const paths = await getWorkspacePaths();
   return {
     paths,
@@ -69,6 +72,7 @@ export const getStaticProps = async ({ params }) => {
   const { site } = params;
   const siteWorkspace = await getSiteWorkspace(site, site.includes('.'));
   let workspace = null;
+  console.log("lmao")
 
   if (siteWorkspace) {
     const { host } = new URL(process.env.APP_URL);
@@ -76,6 +80,7 @@ export const getStaticProps = async ({ params }) => {
       domains: siteWorkspace.domains,
       name: siteWorkspace.name,
       hostname: `${siteWorkspace.slug}.${host}`,
+      workspacehtml: siteWorkspace.workspacehtml
     };
   }
 
